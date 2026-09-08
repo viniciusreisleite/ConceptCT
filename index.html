@@ -80,21 +80,52 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
+    .header-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      flex-shrink: 0;
+    }
+    .badge {
+      background: #e5c158;
+      color: #000;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.9vw;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .brand-title {
+      color: #ffffff;
+      font-size: 2vw;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .brand-logo {
+      max-height: 60px;
+      max-width: 130px;
+      object-fit: contain;
+    }
+    .caption-scroll-wrapper {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
     .caption-box, #caption-text {
       color: #ffffff !important;
       font-weight: 600 !important;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
-      font-size: 2.3vw !important;
-      line-height: 1.4 !important;
+      font-size: 2.1vw !important;
+      line-height: 1.45 !important;
       white-space: pre-line !important;
       display: block;
     }
-
-    /* Animação de Rolagem Suave apenas quando ativada */
     .animar-rolagem {
       animation: rolarTexto 24s ease-in-out infinite alternate !important;
     }
-
     @keyframes rolarTexto {
       0%, 20% {
         transform: translateY(0);
@@ -111,20 +142,28 @@
       <img id="image-player" style="display:none;" />
       <video id="player" autoplay playsinline muted loop style="display:none;"></video>
     </div>
-    <div class="info-section" id="info-container">
-      <div id="caption-text">Carregando informações...</div>
+    <div class="info-section">
+      <div class="header-box">
+        <div>
+          <div class="badge">1º C.T DE MUSCULAÇÃO DE SÃO LOURENÇO-MG</div>
+          <div class="brand-title">CONCEPT CT</div>
+        </div>
+        <img src="logo.png" class="brand-logo" alt="Logo">
+      </div>
+      <div class="caption-scroll-wrapper" id="scroll-wrapper">
+        <div id="caption-text">Carregando informações...</div>
+      </div>
     </div>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var mainContainer = document.getElementById('main-container');
-      var infoContainer = document.getElementById('info-container');
+      var scrollWrapper = document.getElementById('scroll-wrapper');
       var captionElem = document.getElementById('caption-text');
       var imgElem = document.getElementById('image-player');
       var videoElem = document.getElementById('player');
 
-      // 1. Pega o parâmetro ?post=X da URL
       var params = new URLSearchParams(window.location.search);
       var postParam = parseInt(params.get('post'), 10);
 
@@ -133,7 +172,6 @@
         .then(function(posts) {
           if (!posts || posts.length === 0) return;
 
-          // Seleciona pelo id do post ou pelo índice
           var postIndex = 0;
           if (!isNaN(postParam) && postParam >= 1) {
             postIndex = (postParam - 1) % posts.length;
@@ -142,11 +180,10 @@
 
           captionElem.textContent = post.caption || '';
 
-          // 2. Verifica se o texto precisa de rolagem
           setTimeout(function() {
-            var diferenca = captionElem.scrollHeight - infoContainer.clientHeight;
+            var diferenca = captionElem.scrollHeight - scrollWrapper.clientHeight;
             if (diferenca > 20) {
-              var deslocamento = -(diferenca + 40);
+              var deslocamento = -(diferenca + 30);
               captionElem.style.setProperty('--scroll-limit', deslocamento + 'px');
               captionElem.classList.add('animar-rolagem');
             } else {
@@ -154,7 +191,6 @@
             }
           }, 400);
 
-          // 3. Exibição de Imagem ou Vídeo com verificação de carga
           if (post.type === 'video' || (post.media && post.media.endsWith('.mp4'))) {
             mainContainer.className = 'tv-container is-video';
             imgElem.style.display = 'none';
@@ -174,7 +210,7 @@
             imgElem.src = post.media;
           }
         })
-        .catch(function(err) {
+        .catch(function() {
           captionElem.textContent = "Erro ao carregar dados do mural.";
         });
     });
