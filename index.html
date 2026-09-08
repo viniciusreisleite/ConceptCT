@@ -74,6 +74,7 @@
       background-color: #141414;
       color: #fff;
       overflow: hidden !important;
+      position: relative !important;
       box-sizing: border-box !important;
       border-radius: 24px !important;
       border: 1px solid rgba(255, 255, 255, 0.05);
@@ -83,9 +84,24 @@
       color: #ffffff !important;
       font-weight: 600 !important;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
-      font-size: 2.5vw !important;
+      font-size: 2.3vw !important;
       line-height: 1.4 !important;
       white-space: pre-line !important;
+      display: block;
+    }
+
+    /* Animação de Rolagem Suave apenas quando ativada */
+    .animar-rolagem {
+      animation: rolarTexto 24s ease-in-out infinite alternate !important;
+    }
+
+    @keyframes rolarTexto {
+      0%, 20% {
+        transform: translateY(0);
+      }
+      80%, 100% {
+        transform: translateY(var(--scroll-limit, -30%));
+      }
     }
   </style>
 </head>
@@ -95,7 +111,7 @@
       <img id="image-player" style="display:none;" />
       <video id="player" autoplay playsinline muted loop style="display:none;"></video>
     </div>
-    <div class="info-section">
+    <div class="info-section" id="info-container">
       <div id="caption-text">Carregando informações...</div>
     </div>
   </div>
@@ -103,17 +119,49 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var mainContainer = document.getElementById('main-container');
+      var infoContainer = document.getElementById('info-container');
       var captionElem = document.getElementById('caption-text');
       var imgElem = document.getElementById('image-player');
       var videoElem = document.getElementById('player');
 
+      // 1. Pega o parâmetro ?post=X da URL
+      var params = new URLSearchParams(window.location.search);
+      var postParam = parseInt(params.get('post'), 10);
+
       fetch('data.json?v=' + Date.now())
         .then(function(res) { return res.json(); })
         .then(function(posts) {
-          var post = posts[0];
+          if (!posts || posts.length === 0) return;
+
+          // Seleciona pelo id do post ou pelo índice
+          var postIndex = 0;
+          if (!isNaN(postParam) && postParam >= 1) {
+            postIndex = (postParam - 1) % posts.length;
+          }
+          var post = posts[postIndex];
+
           captionElem.textContent = post.caption || '';
 
-          if (post.type === 'image') {
+          // 2. Verifica se o texto precisa de rolagem
+          setTimeout(function() {
+            var diferenca = captionElem.scrollHeight - infoContainer.clientHeight;
+            if (diferenca > 20) {
+              var deslocamento = -(diferenca + 40);
+              captionElem.style.setProperty('--scroll-limit', deslocamento + 'px');
+              captionElem.classList.add('animar-rolagem');
+            } else {
+              captionElem.classList.remove('animar-rolagem');
+            }
+          }, 400);
+
+          // 3. Exibição de Imagem ou Vídeo com verificação de carga
+          if (post.type === 'video' || (post.media && post.media.endsWith('.mp4'))) {
+            mainContainer.className = 'tv-container is-video';
+            imgElem.style.display = 'none';
+            videoElem.src = post.media;
+            videoElem.style.display = 'block';
+            videoElem.play().catch(function() {});
+          } else {
             mainContainer.className = 'tv-container is-image';
             videoElem.style.display = 'none';
 
@@ -125,6 +173,9 @@
             };
             imgElem.src = post.media;
           }
+        })
+        .catch(function(err) {
+          captionElem.textContent = "Erro ao carregar dados do mural.";
         });
     });
   </script>
