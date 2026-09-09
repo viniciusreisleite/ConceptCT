@@ -69,6 +69,17 @@ def processar_mural():
             for _ in range(8):
                 anchors = page.query_selector_all('a[href*="/p/"], a[href*="/reel/"]')
                 for a in anchors:
+                    # Filtro de post fixado
+                    is_pinned = False
+                    try:
+                        pin = a.query_selector("svg[aria-label*='Pin'], svg[aria-label*='Fixado'], svg[title*='Pin'], svg[title*='Fixado']")
+                        if pin:
+                            is_pinned = True
+                    except Exception:
+                        pass
+                    if is_pinned:
+                        continue
+
                     href = a.get_attribute("href")
                     if href:
                         clean = href.split("?")[0].strip("/")
