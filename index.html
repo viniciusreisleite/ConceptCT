@@ -3,253 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <title>Concept CT</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Mural - Concept CT</title>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    body {
-      background: radial-gradient(circle at top right, #0d2847, #061526, #020912);
-      color: #ffffff;
-      font-family: 'Montserrat', sans-serif;
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #0d0d0d;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .tv-container {
+      display: flex;
       width: 100vw;
       height: 100vh;
-      overflow: hidden;
-      display: flex;
-    }
-    .tv-container {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      padding: 3vh 2.5vw;
-      gap: 2.5vw;
-    }
-
-    /* Coluna de Vídeo */
-    .video-section {
-      height: 100% !important;
-      aspect-ratio: 9 / 16 !important;
-      flex: 0 0 auto !important;
-      background: #000 !important;
-      border-radius: 26px !important;
-      overflow: hidden !important;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      position: relative !important;
-      border: 3px solid rgba(255, 255, 255, 0.1) !important;
-    }
-    video, 
-    .progress-bar-container {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.15);
-      z-index: 5;
-    }
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #0284c7, #38bdf8, #7dd3fc);
-      transition: width 0.1s linear;
-    }
-
-    /* Coluna Informativa */
-    .info-section {
-      flex: 1;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(18px);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      border-radius: 26px;
-      padding: 3.5vh 3vw;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow: hidden;
-    }
-
-    /* Cabeçalho */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 25px;
-      padding-bottom: 2vh;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-    }
-    .header-text {
-      flex: 1;
-    }
-    .badge {
-      display: inline-block;
-      background: linear-gradient(135deg, #0284c7, #0ea5e9);
-      color: #ffffff;
-      font-size: clamp(0.75rem, 1vw, 1.05rem);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 6px 18px;
-      border-radius: 50px;
-      margin-bottom: 1vh;
-      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);
-    }
-    .header h1 {
-      font-size: clamp(1.4rem, 2.2vw, 2.6rem);
-      font-weight: 900;
-      line-height: 1.2;
-      color: #f8fafc;
-      letter-spacing: -0.5px;
-    }
-    .header h1 span {
-      color: #38bdf8;
-    }
-
-    .logo-img {
-      height: clamp(85px, 14vh, 140px);
-      max-width: 260px;
-      object-fit: cover;
-      filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.8));
-    }
-
-    /* Área de Texto Auto-Ajustável */
-    
-    
-      
-    video, #image-player {
-      background: #000 !important;
-      background-color: #000 !important;
-    }
-      .header-text h1, .header h1 {
-      text-transform: uppercase !important;
-}
-      /* Motor TV Standard 2026 */
-    .header-text h1, .header h1 {
-      text-transform: uppercase !important;
-    }
-    .header-text h1 span, .header h1 span {
-      text-transform: uppercase !important;
-    }
-    .info-section {
-      height: 100vh !important;
-      max-height: 100vh !important;
-      display: flex !important;
-      flex-direction: column !important;
-      overflow: hidden !important;
-      box-sizing: border-box !important;
-    }
-    .caption-container {
-      flex: 1 1 auto !important;
-      height: 0 !important;
-      margin-top: 2rem !important;
-      overflow-y: scroll !important;
-      scrollbar-width: none !important;
-      -ms-overflow-style: none !important;
-      position: relative !important;
-    }
-    .caption-container::-webkit-scrollbar {
-      display: none !important;
-    }
-    .caption-box {
-      font-size: 2.7vw !important;
-      line-height: 1.4 !important;
-      font-weight: 600 !important;
-      color: #222 !important;
-      word-wrap: break-word !important;
-      white-space: pre-line !important;
-      padding-bottom: 6rem !important;
-    }
-    video, #image-player {
-      background: #000 !important;
-      background-color: #000 !important;
-    }
-      #image-player {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: contain !important;
-      background: #000 !important;
-      background-color: #000 !important;
-    }
-      video {
-      object-fit: contain !important;
-      background: #000 !important;
-      background-color: #000 !important;
-    }
-          /* === Layout Adaptativo Dinamico === */
-    .tv-container {
-      display: flex !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      padding: 1.5rem !important;
-      gap: 1.5rem !important;
-      box-sizing: border-box !important;
+      padding: 1.5rem;
+      gap: 1.5rem;
+      box-sizing: border-box;
+      background-color: #0d0d0d;
     }
     .video-section {
       height: 100% !important;
-      aspect-ratio: 9 / 16 !important;
-      flex: 0 0 auto !important;
       background: #000 !important;
-      border-radius: 26px !important;
+      border-radius: 24px !important;
       overflow: hidden !important;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
       position: relative !important;
-      border: 3px solid rgba(255, 255, 255, 0.1) !important;
     }
-    /* QUANDO FOR VIDEO */
     .tv-container.is-video .video-section {
-      height: 100% !important;
-      aspect-ratio: 9 / 16 !important;
       flex: 0 0 auto !important;
-      background: #000 !important;
-      border-radius: 26px !important;
-      overflow: hidden !important;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      position: relative !important;
-      border: 3px solid rgba(255, 255, 255, 0.1) !important;
+      aspect-ratio: 9 / 16 !important;
     }
     .tv-container.is-video video {
-      width: auto !important;
-      max-width: 50vw !important;
       width: 100% !important;
       height: 100% !important;
       object-fit: contain !important;
-      border-radius: 24px !important;
+      background: #000 !important;
+      border-radius: 20px !important;
       display: block !important;
     }
-    /* QUANDO FOR IMAGEM */
     .tv-container.is-image .video-section {
-      height: 100% !important;
-      aspect-ratio: 9 / 16 !important;
       flex: 0 0 auto !important;
+      width: fit-content !important;
+      max-width: 50vw !important;
       background: #000 !important;
-      border-radius: 26px !important;
-      overflow: hidden !important;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      position: relative !important;
-      border: 3px solid rgba(255, 255, 255, 0.1) !important;
     }
     .tv-container.is-image #image-player {
       width: auto !important;
-      max-width: 100% !important;
       height: 100% !important;
+      max-width: 100% !important;
       object-fit: contain !important;
       border-radius: 20px !important;
       display: block !important;
@@ -258,198 +68,152 @@
       flex: 1 !important;
       height: 100% !important;
       max-height: 100% !important;
-      border-radius: 24px !important;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      padding: 2.5rem 3rem !important;
+      background-color: #141414;
+      color: #fff;
       overflow: hidden !important;
+      position: relative !important;
+      box-sizing: border-box !important;
+      border-radius: 24px !important;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
-          /* Contraste Maximo: Descricao Branca */
-    .caption-container,
-    .caption-box,
-    #caption-text,
-    #caption-container,
-    .caption {
+    .header-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      flex-shrink: 0;
+    }
+    .badge {
+      background: #e5c158;
+      color: #000;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.9vw;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .brand-title {
+      color: #ffffff;
+      font-size: 2vw;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .brand-logo {
+      max-height: 60px;
+      max-width: 130px;
+      object-fit: contain;
+    }
+    .caption-scroll-wrapper {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    .caption-box, #caption-text {
       color: #ffffff !important;
       font-weight: 600 !important;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+      font-size: 2.1vw !important;
+      line-height: 1.45 !important;
+      white-space: pre-line !important;
+      display: block;
+    }
+    .animar-rolagem {
+      animation: rolarTexto 24s ease-in-out infinite alternate !important;
+    }
+    @keyframes rolarTexto {
+      0%, 20% {
+        transform: translateY(0);
+      }
+      80%, 100% {
+        transform: translateY(var(--scroll-limit, -30%));
+      }
     }
   </style>
 </head>
 <body>
-
-  <div class="tv-container is-video" id="main-container">
-    <!-- Coluna de Vídeo -->
+  <div class="tv-container is-image" id="main-container">
     <div class="video-section">
-      <img id="image-player" style="display:none; width:100%; height:100%; object-fit:contain; background-color:#050505;" /><video id="player" autoplay playsinline muted loop preload="auto" style="width:100%; height:100%; object-fit:contain; background-color:#050505;"><source id="video-source" src="" type="video/mp4"></video>
-      <div class="progress-bar-container">
-        <div class="progress-bar" id="progress"></div>
-      </div>
+      <img id="image-player" style="display:none;" />
+      <video id="player" autoplay playsinline muted loop style="display:none;"></video>
     </div>
-
-    <!-- Coluna Informativa -->
     <div class="info-section">
-      <div class="header">
-        <div class="header-text">
-          <span class="badge">Informa & Conecta</span>
-          <h1>Prefeitura de <span>São Lourenço</span></h1>
+      <div class="header-box">
+        <div>
+          <div class="badge">1º C.T DE MUSCULAÇÃO DE SÃO LOURENÇO-MG</div>
+          <div class="brand-title">CONCEPT CT</div>
         </div>
-        <img src="logo.png" alt="Logo Prefeitura de São Lourenço" class="logo-img" onerror="this.style.display='none'">
+        <img src="logo.png" class="brand-logo" alt="Logo">
       </div>
-
-      <div class="caption-container" id="caption-container">
-        <div class="caption-box" id="caption-text">
-          Carregando informações oficiais...
-        </div>
+      <div class="caption-scroll-wrapper" id="scroll-wrapper">
+        <div id="caption-text">Carregando informações...</div>
       </div>
     </div>
   </div>
 
-          <script>
-    function iniciarAutoScroll(container) {
-      if (!container) return;
-      if (window.__scrollInterval) clearInterval(window.__scrollInterval);
-      if (window.__scrollTimer) clearTimeout(window.__scrollTimer);
-
-      container.scrollTop = 0;
-
-      window.__scrollTimer = setTimeout(function() {
-        var diferenca = container.scrollHeight - container.clientHeight;
-        if (diferenca > 15) {
-          var descendo = true;
-          var pausado = false;
-
-          window.__scrollInterval = setInterval(function() {
-            if (pausado) return;
-
-            if (descendo) {
-              container.scrollTop += 1;
-              if (container.scrollTop >= diferenca) {
-                pausado = true;
-                setTimeout(function() {
-                  descendo = false;
-                  pausado = false;
-                }, 3000);
-              }
-            } else {
-              container.scrollTop -= 3;
-              if (container.scrollTop <= 0) {
-                container.scrollTop = 0;
-                descendo = true;
-                pausado = true;
-                setTimeout(function() {
-                  pausado = false;
-                }, 3500);
-              }
-            }
-          }, 35);
-        }
-      }, 2500);
-    }
-
+  <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var mainContainer = document.getElementById('main-container') || document.querySelector('.tv-container');
-      var containerElem = document.getElementById('caption-container');
-      var captionElem = document.getElementById('caption-text') || containerElem;
-      var player = document.getElementById('player');
-      var videoSource = document.getElementById('video-source');
-      var imagePlayer = document.getElementById('image-player');
+      var mainContainer = document.getElementById('main-container');
+      var scrollWrapper = document.getElementById('scroll-wrapper');
+      var captionElem = document.getElementById('caption-text');
+      var imgElem = document.getElementById('image-player');
+      var videoElem = document.getElementById('player');
 
-      var ts = new Date().getTime();
+      var params = new URLSearchParams(window.location.search);
+      var postParam = parseInt(params.get('post'), 10);
 
-      fetch('data.json?v=' + ts)
-        .then(function(res) {
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          return res.json();
-        })
+      fetch('data.json?v=' + Date.now())
+        .then(function(res) { return res.json(); })
         .then(function(posts) {
-          if (!Array.isArray(posts) || posts.length === 0) {
-            if (captionElem) captionElem.textContent = 'Nenhuma publicação encontrada.';
-            return;
+          if (!posts || posts.length === 0) return;
+
+          var postIndex = 0;
+          if (!isNaN(postParam) && postParam >= 1) {
+            postIndex = (postParam - 1) % posts.length;
           }
+          var post = posts[postIndex];
 
-          var urlParams = new URLSearchParams(window.location.search);
-          var postParam = urlParams.get('post');
-          var postIdx = parseInt(postParam, 10);
+          captionElem.textContent = post.caption || '';
 
-          var currentPost = posts[0];
-          if (!isNaN(postIdx)) {
-            var encontrado = posts.filter(function(p) {
-              return p.id === postIdx || String(p.id) === String(postIdx);
-            });
-            currentPost = (encontrado.length > 0) ? encontrado[0] : (posts[postIdx - 1] || posts[0]);
-          }
-
-          var texto = currentPost.caption || currentPost.text || '';
-          texto = texto.replace(/\n{3,}/g, '\n\n').trim();
-
-          if (captionElem) {
-            captionElem.textContent = texto;
-            iniciarAutoScroll(containerElem);
-          }
-
-          var midiaArquivo = currentPost.media || currentPost.media_file || currentPost.video_file || currentPost.arquivo || '';
-          var isFoto = currentPost.type === 'image' || (midiaArquivo && (midiaArquivo.indexOf('.jpg') !== -1 || midiaArquivo.indexOf('.png') !== -1));
-
-          if (isFoto) {
-            if (mainContainer) {
-              mainContainer.classList.remove('is-video');
-              mainContainer.classList.add('is-image');
+          setTimeout(function() {
+            var diferenca = captionElem.scrollHeight - scrollWrapper.clientHeight;
+            if (diferenca > 20) {
+              var deslocamento = -(diferenca + 30);
+              captionElem.style.setProperty('--scroll-limit', deslocamento + 'px');
+              captionElem.classList.add('animar-rolagem');
+            } else {
+              captionElem.classList.remove('animar-rolagem');
             }
-            if (player) {
-              player.pause();
-              player.style.display = 'none';
-            }
-            if (imagePlayer) {
-              imagePlayer.style.display = 'block';
-              imagePlayer.src = midiaArquivo + '?v=' + ts;
-            }
+          }, 400);
+
+          if (post.type === 'video' || (post.media && post.media.endsWith('.mp4'))) {
+            mainContainer.className = 'tv-container is-video';
+            imgElem.style.display = 'none';
+            videoElem.src = post.media;
+            videoElem.style.display = 'block';
+            videoElem.play().catch(function() {});
           } else {
-            if (mainContainer) {
-              mainContainer.classList.remove('is-image');
-              mainContainer.classList.add('is-video');
-            }
-            if (imagePlayer) imagePlayer.style.display = 'none';
-            if (player && videoSource) {
-              player.style.display = 'block';
-              player.style.backgroundColor = '#000';
-              player.muted = true;
-              player.defaultMuted = true;
-              player.loop = true;
+            mainContainer.className = 'tv-container is-image';
+            videoElem.style.display = 'none';
 
-              // Auto-ajuste dinâmico: vertical (9:16) ou horizontal/quadrado (layout flexível)
-              player.onloadedmetadata = function() {
-                if (player.videoWidth >= player.videoHeight) {
-                  mainContainer.classList.remove('is-video');
-                  mainContainer.classList.add('is-image');
-                } else {
-                  mainContainer.classList.remove('is-image');
-                  mainContainer.classList.add('is-video');
-                }
-              };
-
-              player.onended = function() {
-                player.currentTime = 0;
-                player.play().catch(function() {});
-              };
-
-              var mediaUrl = midiaArquivo + '?v=' + ts;
-              videoSource.src = mediaUrl;
-              player.src = mediaUrl;
-              player.load();
-              player.play().catch(function(e) {
-                console.log('Autoplay:', e);
-              });
-            }
+            imgElem.onload = function() {
+              imgElem.style.display = 'block';
+            };
+            imgElem.onerror = function() {
+              setTimeout(function() { imgElem.src = post.media + '?retry=' + Date.now(); }, 3000);
+            };
+            imgElem.src = post.media;
           }
         })
-        .catch(function(err) {
-          console.error('Erro ao carregar dados:', err);
-          if (captionElem) captionElem.textContent = 'Erro ao carregar dados do mural.';
+        .catch(function() {
+          captionElem.textContent = "Erro ao carregar dados do mural.";
         });
     });
   </script>
 </body>
 </html>
-
-
-
-
-
