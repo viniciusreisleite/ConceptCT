@@ -197,7 +197,9 @@
             videoElem.play().catch(function() {});
           } else {
             mainContainer.className = 'tv-container is-image';
-            videoElem.style.display = 'none';
+            videoElem.pause();
+            videoElem.removeAttribute('src');
+            videoElem.style.setProperty('display', 'none', 'important');
 
             imgElem.onload = function() {
               imgElem.style.display = 'block';
